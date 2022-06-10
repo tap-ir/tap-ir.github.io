@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Value","[Value] is a clonable and serializable variant kind use as value of Attribute."],["ValueTypeId",""]]});

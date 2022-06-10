@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MemoryVFile","[MemoryVFile] implement [VFile] [Read] + [Seek] trait for a [Vec]<[u8]>."],["MemoryVFileBuilder","Implement a [VFileBuilder] that cache in memory the content of an other [VFileBuilder]."]]});

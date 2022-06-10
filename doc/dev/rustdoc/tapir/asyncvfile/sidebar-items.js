@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AsyncVFile","Wrap VFile and implem AsyncRead."]]});

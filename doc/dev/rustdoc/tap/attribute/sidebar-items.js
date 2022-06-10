@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Attribute","An Attribute contain a `name`, a `value` and a `description`."],["Attributes","[Attributes] is a container for [Attribute]."],["LockedAttributes",""]]});

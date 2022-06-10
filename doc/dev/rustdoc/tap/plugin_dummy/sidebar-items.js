@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Arguments","The argument struct that will be passed to the  run method of the plugin."],["Dummy","The dummy plugin"],["DummyDynamicValue",""],["Plugin",""],["Results","The results class that will be returned from the plugin."]]});

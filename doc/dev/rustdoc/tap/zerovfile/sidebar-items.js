@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ZeroVFileBuilder","VFileBuilder implementation for ZeroVFile. A VFile with an infinize size that return data set to 0 can be used in a MappedVFile to simulate sparse zone."]]});

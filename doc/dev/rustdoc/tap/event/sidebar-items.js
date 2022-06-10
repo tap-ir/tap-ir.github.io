@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["EventChannel",""],["Events","Events receiver "]]});
