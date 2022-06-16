@@ -4,7 +4,7 @@ h help:
 	@grep '^[a-z]' Makefile
 
 docs:
-	npx docsify-cli serve docs
+	npx docsify-cli serve 
 
 docs-py:
-	cd docs && python3 -m http.server 3000
+	python3 -m http.server 3000
