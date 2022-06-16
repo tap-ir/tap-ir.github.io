@@ -1,79 +1,124 @@
-<!-- TODO: Update with your values. -->
-# User documentation 
-> Starter template for a Markdown-based docs site
+# About 
 
- <!-- TODO: Update repo links and change license type if needed. -->
-[![GitHub tag](https://img.shields.io/github/tag/tap-ir/docsifyjs-template.svg)](https://GitHub.com/tap-ir/docsifyjs-template/tags/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/tap-ir/docsifyjs-template/blob/master/README#license)
+## Installation 
 
-[![Made with latest Docsify](https://img.shields.io/npm/v/docsify/latest?label=docsify)](https://docsify.js.org/)
+!> TODO 
 
+## Running 
 
-<!-- TODO: You can delete the About and Create a Docsify site sections if you create a new project from this template -->
+!> TODO 
 
-## About
+# Command line
 
-This is a template for a simple but elegant docs site built on _Docsify_ which magically turns your markdown in your `docs` directory into a docs site. 
+!> TODO 
 
-This is a statically-built site - just commit and push and your Github Pages site will re-deploy.
+## Loading data
 
-_Docsify.js_ runs as a _Single-Page Application_ on `index.html` - it relies on JavaScript to pull in content from markdown file, within the app shell. This gives a modern progressive web-app experience for instant page loads. But, this **not** SEO-friendly as crawlers don't like to or can't load JavaScript. So use a static site instead if you need to be found on search engines.
-
-If you want learn about _Docsify_ and how to customize a docs like this, follow this tutorial:
-
-<div align="center">
-    <a href="https://michaelcurrin.github.io/docsify-js-tutorial/">
-        <img src="https://img.shields.io/badge/Teach_me-DocsifyJS_tutorial-blue" 
-            alt="DocsifyJS tutorial badge"
-            title="Go to tutorial">
-    </a>
-</div>
+!> TODO 
+### Scan
+### Local
 
 
-## Create a Docsify site
-> How to create your own docs site like this one
+## Browsing 
 
-Click the button below to create your own copy of this repo.
+!> TODO 
 
-<div align="center">
-    <a href="https://github.com/tap-ir/docsifyjs-template/generate">
-        <img src="https://img.shields.io/badge/Generate-Use_this_template-2ea44f?style=for-the-badge" 
-            alt="Use this template"
-            title="Create repo from template">
-    </a>
-</div>
+### Listing files
+### Listing attributes
+### Displaying file content
+### Downloading files
+### Uploading files
 
-<br>
+## Tasks
 
-Then follow instructions in the original GitHub repo linked below. The `README.md` file covers how to set up docs site like this one.
+!> TODO 
 
-<div align="center">
-    <a href="https://github.com/tap-ir/docsifyjs-template">
-        <img src="https://img.shields.io/static/v1?label=MichaelCurrin&message=docsify-js-template&color=blue&style=for-the-badge&logo=github" 
-            alt="MichaelCurrin - docsify-js-template"
-            title="Go to template repo">
-    </a>
-</div>
+### Plugins
+### Listing process
+ 
+### Listing tasks
+
+## Query & timeline
+
+!> TODO 
+
+### Finding files
+### Creating timeline
+
+## Executing plugins
+
+!> TODO 
+
+## Scripting
+
+!> TODO 
+
+# Web UI 
+
+!> TODO 
+
+## Connection
+
+!> TODO 
+
+## Browser
+
+!> TODO 
 
 
-## Preview
+### Files & directories
+### Managing column
+#### Sorting
+#### Filtering
+### Downloading files
+### Copying 
+### Exporting 
+#### CSV 
+#### JSON
+### Running plugins
 
-_TODO: Complete with your content - such as a screenshot of your app or command-line usage. You can also rename Preview to Sample._
+!> TODO 
+
+## Tasks
+
+!> TODO 
+### Filtering
+### Error
 
 
-## Installation
+## Plugins
 
-_TODO: Add your instructions here or link to an installation.md page._
+!> TODO 
 
+## Search
 
-## Usage
+!> TODO 
+### Manual
+### Wizard
+### Exporting
 
-_TODO: Add your instructions here or link to a usage.md page._
+## Timeline
 
+!> TODO 
+### Column
+### Exporting
 
-## Demo
+## Viewer
 
-This section showcases some functionality of Docsify.
+!> TODO 
+### Auto
+### Hex
+### Text
+### PDF
+### Image
+### Video
+### Word
+### Excel
+### CSV
+
+# Demo
+
+_ITALIC_
 
 ```bash
 echo "Hello, World"
