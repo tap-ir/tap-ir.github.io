@@ -2,5 +2,5 @@
 
 > Trustable Artificats Parser for Incident Response 
 
-[Get Started](#Introduction) 
+[Get Started](#About) 
 [Download](https://github.com/tap-ir/tapir/releases) 
