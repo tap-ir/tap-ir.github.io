@@ -1,5 +1,6 @@
 # TAPIR
 
+![tapir](tapir.png)
 > Trustable Artificats Parser for Incident Response 
 
 [Get Started](#About) 

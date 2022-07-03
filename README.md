@@ -553,40 +553,127 @@ for node_id in query:
 
 # Web UI 
 
-!> Work in progress 
+[TAPIR-Frontend](https://github.com/tap-ir/tapir-frontend) is a full featured web user interface directly integrated into the **TAPIR** binary. The interface let you interact with a distant [TAPIR](https://github.com/tap-ir/tapir) server, browse files, directories, search and filter data, create timeline, visualize data, launch plugins, download files ... and a lot of other cool stuff ! 
 
-<!--## Connection-->
+## Login 
 
-<!--!> TODO -->
+Just launch a browser and connect via http (or https if set in the **TAPIR** configuration) to the same address and port 
+than the one configured on the server. (By default http://127.0.0.1:3583/) 
 
-<!--## Browser-->
+?> When you run the server, if available, a browser will be automatically launch and connect to the web ui locally
 
-<!--!> TODO -->
+Once connected just enter the API key you set on the server to loggin (default is 'key'). 
+
+![Frontend login](login.jpg)
+
+
+## Overview
+
+![Overview](overview.jpg)
+
+The main window of the UI is composed of a [toolbar](http://tap-ir.github.io/#/?id=tool-bar), and different tabset and [window](http://tap-ir.github.io/#/?id=window). 
+
+## Tool bar
+
+The toolbar is on the top of main window, it's composed of a serie of buttons.
+![Toolbar](toolbar.jpg)
+
+### Launching new window
+
+By default when you connect to the web ui one of each type of window (browser, search, timeline, tasks, plugins) is already launched.
+If you need you can click one of the corresponding toolbar button to create a new window of that type. This is handy to compare some directories, 
+or keep the result of a launched search or timeline. When a new window is launched it will be added to the current tab group. 
+If needed you can detab and [move](https://tap-ir.github.io/#/?id=moving-window) the window. 
+
+### Fullscreen
+
+The ![fullscreen](fullscreen.jpg) button will set your browser in fullscreen mode, click again on the button or press `esc` on Firefox to exif fullscreen.
+
+### Help 
+
+The ![help](help.jpg) button open a new windows that bring you to this documentation, if your server have internet access.
+
+## Window
+
+The web interface is composed of different window that let interact with **TAPIR** and visualize data.
+
+### Moving Window
+
+Each window can be moved to an other tabset or can be dettabbed and be placed anywhere on the screen.
+To do that left click on the window then at the same time moved the window where you want to place it.
+
+<!-- XXX screenshoot/gif anime -->
+
+### Renaming window
+
+You can rename window by double-clicking on their name, this can be useful to find them more easily.
+
+![rename](rename.jpg)
+
+### Maximizing tabset
+
+You can maximize a specific tabset by clicking on ![maximize](maximize.jpg), on the top right corner of the window,
+this can be helpful to see more data at once. Click back on the button to restore the tabset.
+
+### Popout the viewer
+
+The [viever](https://tap-ir.github.io/#/?id=viewer) is a specific windows that display file content, there is only one viewer on you can't launch an other one,
+as it's content is updated when you click on file on any opened browser. The viewer can be poped out to for example be displayed on a second screen.
+To do that click on ![popout](popout.jpg) on the top right corner of the window. To restore the browser in the main window, just close the poped out window.
+
+## Browser
+
+The browser let you browse and interact with the nodes (files and directory) and their attributes in a tree view, that look like a classical file explorer.
+
+![browser](browser.jpg)
+
+The browser is divide into four part the toolbar on the top, then three panel, the directory tree on the left, the file browser on the center, and the attribute panel in the right.
+
+### Browser toolbar
+
+![browser-toolbar](browser-toolbar.jpg)
+
+The toolbar is divised in a range of button and a center editable bar.
+
+- Click ![browser-toolbar-arrow](browser-toolbar-arrow.jpg) to go back to the parent directory.
+- Click ![browser-toolbar-home](browser-toolbar-home.jpg) to go back to the root directory.
+- Modify ![browser-toolbar-text](browser-toolbar-path.jpg) and click enter to go to that directory.
+- Click ![browser-toolbar-column](browser-toolbar-column.jpg) to edit columns.
+- Click ![browser-toolbar-export](browser-toolbar-export.jpg) to export row selected in the central panel to json or csv, and download a bunch of selected file in a zip. 
+
+### Directory tree
+
+![directory-tree](directory-tree.jpg)
+
+The directory tree let you expand any nodes that have children by clicking on the ![tree-arrow](tree-arrow.jpg), if you click on the name of a directory, the list of it's children will appear on the center panel.
 
 
 <!--### Files & directories-->
-<!--### Managing column-->
-<!--#### Sorting-->
-<!--#### Filtering-->
-<!--### Downloading files-->
-<!--### Copying -->
-<!--### Exporting -->
+
+<!--#### Managing column-->
+
+<!--##### Sorting-->
+
+<!--##### Filtering-->
+
+<!--#### Menu-->
+
+<!--##### Downloading files-->
+
+<!--##### Copying -->
+
+<!--##### Exporting -->
+
 <!--#### CSV -->
+
 <!--#### JSON-->
-<!--### Running plugins-->
 
-<!--!> TODO -->
+<!--#### Running plugins-->
 
-<!--## Tasks-->
+<!--### Attributes tree-->
 
-<!--!> TODO -->
-<!--### Filtering-->
-<!--### Error-->
+<!--### Menu -->
 
-
-<!--## Plugins-->
-
-<!--!> TODO -->
 
 <!--## Search-->
 
@@ -614,20 +701,13 @@ for node_id in query:
 <!--### Excel-->
 <!--### CSV-->
 
- <!--Demo make a video -->
+<!--## Tasks-->
 
- <!--#Walkthrough make a walktrough were people download a dump etc (like video but with command written step by step)-->
+<!--### Filtering-->
+<!--### Error-->
 
-<!--# Demo-->
 
-<!--_ITALIC_-->
+<!--## Plugins-->
 
-<!--```bash-->
-<!--echo "Hello, World"-->
-<!--```-->
 
-<!-- > Sample quote -->
-
-<!--?> Sample hint-->
-
-<!--!> Sample warning -->
+!> Work in progress 
