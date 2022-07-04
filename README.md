@@ -568,12 +568,11 @@ for node_id in query:
 
 ## Login 
 
-Just launch a browser and connect via http (or https if set in the **TAPIR** configuration) to the same address and port 
-than the one configured on the server. (By default http://127.0.0.1:3583/) 
+Just launch a browser and connect via http (or https if set in the **TAPIR** configuration) to the address and port set in the server configuration. (By default http://127.0.0.1:3583/) 
 
-?> When you run the server, if available, a browser will be automatically launch and connect to the web ui locally
+?> When you run the server, if available, a browser will be automatically launched and connected to the Web UI. 
 
-Once connected just enter the API key you set on the server to loggin (default is 'key'). 
+Once connected just enter the API key, set in the server configuration, to loggin (default is 'key'). 
 
 ![Frontend login](login.jpg)
 
@@ -582,16 +581,16 @@ Once connected just enter the API key you set on the server to loggin (default i
 
 ![Overview](overview.jpg)
 
-The main window of the UI is composed of a [toolbar](http://tap-ir.github.io/#/?id=tool-bar), and different tabset and [window](http://tap-ir.github.io/#/?id=window). 
+The main window of the UI is composed of a [toolbar](http://tap-ir.github.io/#/?id=toolbar), and different tabsets and [windows](http://tap-ir.github.io/#/?id=window). 
 
-## Tool bar
+## Toolbar
 
-The toolbar is on the top of main window, it's composed of a serie of buttons.
+The toolbar is on the top of the main window, it's composed of a serie of buttons.
 ![Toolbar](toolbar.jpg)
 
 ### Launching new window
 
-By default when you connect to the web ui one of each type of window (browser, search, timeline, tasks, plugins) is already launched.
+By default when you connect to the web ui, one of each type of window (browser, search, timeline, tasks, plugins) is already launched.
 If you need you can click one of the corresponding toolbar button to create a new window of that type. This is handy to compare some directories, 
 or keep the result of a launched search or timeline. When a new window is launched it will be added to the current tab group. 
 If needed you can detab and [move](https://tap-ir.github.io/#/?id=moving-window) the window. 
@@ -602,22 +601,22 @@ The ![fullscreen](fullscreen.jpg) button will set your browser in fullscreen mod
 
 ### Help 
 
-The ![help](help.jpg) button open a new windows that bring you to this documentation, if your server have internet access.
+The ![help](help.jpg) button open a new window that bring you to this documentation (if your server have internet access).
 
 ## Window
 
-The web interface is composed of different window that let interact with **TAPIR** and visualize data.
+The web interface is composed of different windows that let you interact with **TAPIR** and visualize data.
 
 ### Moving Window
 
-Each window can be moved to an other tabset or can be dettabbed and be placed anywhere on the screen.
-To do that left click on the window then at the same time moved the window where you want to place it.
+Each window can be moved to an other tabset or can be detabbed and be placed anywhere on the screen.
+To do that, left click on the window then at the same time move the window where you want to place it.
 
 <!-- XXX screenshoot/gif anime -->
 
 ### Renaming window
 
-You can rename window by double-clicking on their name, this can be useful to find them more easily.
+You can rename windows by double-clicking on their name, this can be useful to find them more easily.
 
 ![rename](rename.jpg)
 
@@ -628,17 +627,16 @@ this can be helpful to see more data at once. Click back on the button to restor
 
 ### Popout the viewer
 
-The [viever](https://tap-ir.github.io/#/?id=viewer) is a specific windows that display file content, there is only one viewer on you can't launch an other one,
-as it's content is updated when you click on file on any opened browser. The viewer can be poped out to for example be displayed on a second screen.
-To do that click on ![popout](popout.jpg) on the top right corner of the window. To restore the browser in the main window, just close the poped out window.
+The [viever](https://tap-ir.github.io/#/?id=viewer) is a specific window that display file content, there is only one viewer window and you can't launch an other one. It's content is updated when you click a file on any opened browser. The viewer can be poped out to, for example, be displayed on a second screen.
+To do that click on ![popout](popout.jpg) on the top right corner of the window. To restore the browser in the main window, just close the popped out window.
 
 ## Browser
 
-The browser let you browse and interact with the nodes (files and directory) and their attributes in a tree view, that look like a classical file explorer.
+The browser let you browse and interact with the nodes (files and directory) and their attributes, in a tree view, that look like a classical file explorer.
 
 ![browser](browser.jpg)
 
-The browser is divide into four part the toolbar on the top, then three panel, the directory tree on the left, the file browser on the center, and the attribute panel in the right.
+The browser is divided into four part : the toolbar on the top, the directory tree on the left, the file browser on the center, and the attribute panel in the right.
 
 ### Browser toolbar
 
@@ -650,28 +648,28 @@ The toolbar is divised in a range of button and a center editable bar.
 - Click ![browser-toolbar-home](browser-toolbar-home.jpg) to go back to the root directory.
 - Modify ![browser-toolbar-text](browser-toolbar-path.jpg) and click enter to go to that directory.
 - Click ![browser-toolbar-column](browser-toolbar-column.jpg) to edit columns.
-- Click ![browser-toolbar-export](browser-toolbar-export.jpg) to export row selected in the central panel to json or csv, and download a bunch of selected file in a zip. 
+- Click ![browser-toolbar-export](browser-toolbar-export.jpg) to export rows selected in the central panel, to JSON or CSV, or download a bunch of selected files into a zip archive.
 
 ### Directory tree
 
 ![directory-tree](directory-tree.jpg)
 
-The directory tree let you expand any nodes that have children by clicking on the ![tree-arrow](tree-arrow.jpg), if you click on the name of a directory, the list of it's children will appear on the center panel.
+The directory tree let you expand any nodes that have children by clicking on ![tree-arrow](tree-arrow.jpg), if you click on the name of a directory, the list of it's children will appear on the center panel.
 
 ### File browser
 
 ![file-browser](file-browser.jpg)
 
-The file browser show you a table with the current children nodes (files and directory) of the current path. 
-If you click on any node on the table (file or directory), it's attribute will be shown on the right panel, if this node have data (for example, file of file system), their data will be displayed by the file [viewer](https://tap-ir.github.io/#/?id=viewer).
+The file browser show you a table with the current children nodes (files and directories) contained in the current path. 
+If you click on any nodes on the table (files or directories), it's attributes will be shown on the right panel, if this node have data (for example, if it's a file of file system), their data will be displayed by the file [viewer](https://tap-ir.github.io/#/?id=viewer).
 
-When you double click a directory, it will change the current path to that directory.
+When you double click a directory, the current path will change to the one of that directory.
 
 #### Column
 
 ##### Change order
 
-You can change column by doing drap and drop, just left click on the column name while moving the column.
+You can change column order via drap and drop, just left click on the name of the column, you want to move, while moving the column.
 
 ![move-column](file-browser-drag-drop.jpg)
  
@@ -679,37 +677,37 @@ You can change column by doing drap and drop, just left click on the column name
 
 ![sorting](file-browser-sorting.jpg)
 
-You can sort the column by clicking on the arrow on the top of the column, click again to sort on the other order, and click a third time to cancel sorting. 
+You can sort the column by clicking on the arrow on the top of the column, click again to sort to the other order, and click a third time to cancel sorting. 
 
 #### Searching
 
 ![column-search](file-browser-filtering.jpg)
 
-You can search on a column, or sorted column by clicking on the magnyfying glass, typin a text and then clicking search. The text you have search will be highlighted.You can click reset to cancel the search.
+You can search data on a column, or a sorted column, by clicking on the magnyfying glass, then enter your search term  and then click search. The text you have searched will be highlighted. You can click reset to cancel the search.
 
 ![column-search-filter](file-browser-search-filter.jpg)
 
-You can go further and click filter, to filter on your current search. 
+You can go further and click filter, to filter your current search. 
 
 #### Selection 
 
 ![selection](file-browser-selection.jpg)
 
-You can select nodes (files and directories) by clicking on the checkbox on the far left column. Once nodes are selected you can [export](https://tap-ir.github.io/#/?id=export) your data.
+You can select nodes (files and directories) by clicking on the checkable box on the far left column. Once nodes are selected you can [export](https://tap-ir.github.io/#/?id=export) your data.
 
 ##### Export
 
-To export selected data click on ![export](browser-toolbar-export.jpg) button in the toolbar.
+To export selected data, click on ![export](browser-toolbar-export.jpg) button in the toolbar.
 
 ![exporting](export-selection.jpg)
 
-You can choose to export the current selection (nodes with checked boxes) by clicking 'selection' or all nodes in the current view by clicking 'all'.
+You can choose to export the current selection (nodes with checked boxes) by clicking 'selection' or export all nodes in the current view by clicking 'all'.
 
 Then you can choose to export to CSV or JSON format : 
 
 ![export-json](export-json.jpg)
 
-You can specify the filename, and then click 'ok' that file will be automatically downloaded by your browser. When you export to JSON all attributes for the selected nodes will appears on the file, when you export in CSV only the currently selected column will be exported to the file, in the same order of the current view.
+You can specify the name of output filed, and then click 'ok', that file will be automatically downloaded by your browser. When you export to JSON all attributes for the selected nodes will be exported. When you export to CSV only the currently selected columns will be exported, the order of the column in the current view will be preserved.
 
 ?> You can add new column by right clicking on the [attributes tree](https://tap-ir.github.io/#/?id=attributes-tree). 
 
@@ -733,7 +731,9 @@ The open in new browser button will launch a new browser pointing to the current
 
 ![menu-copy](menu-copy.jpg)
 
-By clicking the copy button you can copy the current file full path, or the current selected text in the clipboard.
+By clicking the copy button you can copy the currently selected nodefull path, or the currently selected text in the clipboard.
+
+?> Copying the node path is useful when, at the same time, you use [TAPyR-CMD](https://github.com/tap-ir/tapyr-cmd) as you can paste the paste of the node to the shell to run some command on it.
 
 ##### Download
 
@@ -747,19 +747,19 @@ By clicking the download button you can download the current file.
 
 ![menu-plugin](menu-plugin.jpg)
 
-The plugin button let you run any of the **TAPIR** plugin. When selecting a plugin in the menu, a pop up window will be shown : 
+The plugin button let you run any of the **TAPIR** plugin. When selecting a plugin in the menu, a window will pop-up : 
 
 ![plugin-hash](plugin-hash.jpg)
 
-This window will dynamically created for you, so you can enter any of the plugin argument, the default node on which the plugin will apply will be automatically filled with the currently selected node. 
+This window is dynamically created, so you can enter any of the plugin argument. The default node on which the plugin will be applyied will be automatically filled with the currently selected node.
 
-?> When a plugin is added to the [TAP](https://github.com/tap-ir/tap) library and [TAPIR](https://github.com/tap-ir/tapir) it will be automatically added to this menu without needing the developer to add anything. 
+?> When a plugin is added to the [TAP](https://github.com/tap-ir/tap) library and to [TAPIR](https://github.com/tap-ir/tapir), it will be automatically added to this menu without needing the developer to add anything. 
 
 ##### Viewer
 
 ![menu-viewer](menu-viewer.jpg)
 
-This interface as a dedicated [viewer](https://tap-ir.github.io/#/?id=viewer) window, but you can also launch a viewer in it's on window by selecting one of the viewer via this menu.
+This interface as a dedicated [viewer](https://tap-ir.github.io/#/?id=viewer) window, but you can also launch a viewer on a new window by selecting one of the viewer via this menu.
 
 ##### Add attribute
 
@@ -771,7 +771,7 @@ You can add attribute on any node by clicking the 'add attribute' button.
 
 A popup will shown where you can specify the name and the value of the attribute.
 
-?> Adding attriute is a good way to share some informations with other investigator connected to the same **TAPIR** server.
+?> Adding attribute is a good way to share some information with other investigator connected to the same **TAPIR** server.
 
 
 ### Attributes tree
@@ -779,19 +779,19 @@ A popup will shown where you can specify the name and the value of the attribute
 ![attribute-tree](attribute-tree.jpg)
 
 The attribute tree is the right panel in the browser.
-It let you display the different attribute of the current node. 
-You can click the ![attribute-tree-arrow](attribute-tree-arrow.jpg) button to expand some attributes and see it's children.  
+It let you display the different attributes of the current node. 
+You can click the ![attribute-tree-arrow](attribute-tree-arrow.jpg) button to expand an attribute and see it's children.  
 
 ### Menu 
 
 You can right click on an attribute to display a menu.
-This menu let you copy the current attribute name, value, attribute and value or the current slected text.
+This menu let you : copy the current attribute name, value, attribute and value or the current slected text.
 
-?> This can be usefull to copy some valuable artifact to your report !
+?> This can be usefull to copy some valuable artifacts to your report !
 
-You can also click the 'add column button' to add a column on the file browser for this current attributes.
+You can also click the 'add column button', to add a column on the file browser for the currently selected attribute.
 
-?> It's really helpful to add column when you're browsing data exported by the registry or the evtx plugin, as information for those format will not be displayed as column by default.
+?> It's really helpful to add column when you're browsing data exported by the registry or the evtx plugin, as attributes for those format will not be displayed as column by default.
 
 ## Search
 
@@ -799,7 +799,7 @@ You can also click the 'add column button' to add a column on the file browser f
 
 The search window is a table which look a lot like the [browser](https://tap-ir.github.io/#/?id=browser), except it doesn't have a left panel with a tree viewer, and also have specific button that let you create powerfull query to search for specific data.
 
-Look at the [browser](https://tap-ir.github.io/#/?id=browser) documentation to know how to add, filter, search and column, export data, ...
+Look at the [browser](https://tap-ir.github.io/#/?id=browser) documentation to know how to add, filter, and search on column, how to export data, ...
 
 
 ### Manual query
@@ -808,19 +808,19 @@ You can create and run your own query with the same syntax as the one used by th
 
 ### Wizard
 
-An easier way to create your query is to use click on the ![search-wand](search-wand.jpg) button. 
+An easier way to create your query is to click on the ![search-wand](search-wand.jpg) button. 
 
 ![query-editor](query-editor.jpg)
 
-This will popup a wizard that will guide you to create your query. For more information on the different field refer to the [find](https://tap-ir.github.io/#/?id=query-syntax) command documentation.
+This will popup a wizard that will guide you to create your query. For more information on the differents fields refer to the [find](https://tap-ir.github.io/#/?id=query-syntax) command documentation.
 
 ### Result
 
-Once you hit the 'enter' key or click the ![search-button](search-button.jpg) button, the search will begin once finished a popup with the number of result will appear : 
+Once you hit the 'enter' key or click the ![search-button](search-button.jpg) button, the search will begin, once finished a popup with the number of result will appear : 
 
 ![search-result-popup](search-result-popup.jpg)
 
-The number of result found will also appear on the far right of the toolbar : 
+The number of results found will also appear on the far right of the toolbar : 
 
 
 ![search-result-tool](search-result-tool.jpg)
@@ -830,7 +830,7 @@ The number of result found will also appear on the far right of the toolbar :
 
 ![timeline](timeline.jpg)
 
-The timeline windows let you easily create a timeline and export it's result.
+The timeline window let you easily create a timeline and export it's result.
 It's a table which look a lot like the [browser](https://tap-ir.github.io/#/?id=browser), except it doesn't have a left panel with a tree viewer, and also have specific button that let you specify the range date of your timeline.
 
 ![timeline-range](timeline-range.jpg)
@@ -845,27 +845,27 @@ Once your timeline is created a popup will appear :
 ![timeline-result-popup](timeline-result-popup.jpg)
 
 
-The number of result found will also appear on the far right of the toolbar : 
+The number of results found will also appear on the far right of the toolbar : 
 ![timeline-result-tool](timeline-result-tool.jpg)
 
 ## Viewer
 
 ![viewer](viewer.jpg)
 
-The viewer windows let you display the data of the currently selected node in any of the browser in different format. There is only one instance of the viewer window for each of the browser but you can open a viewer in it's own window by using the [browser menu](https://tap-ir.github.io/#/?id=menu)
+The viewer window let you display the data of the currently selected node, in any of the browser, in different format. There is only one instance of the viewer window for each of the browser but you can open a viewer in it's own window by using the [browser menu](https://tap-ir.github.io/#/?id=menu).
 
 ?> You can [popout](http://tap-ir.github.io/#/?id=popout-the-viewer) the viewer to put it on a second screen or in an other area. 
 
 By default the 'auto' mode is selected, it will select for you the right viewer depending of this conditions :
   - If the magic plugin or the scan command was run it will use the detected file type to select which viewer to launch. (The magic plugin export the type in the 'datatype' attribute)
   - It will use the extension of the file to select the right viewer
-  - If filetype is not supported it will display the file as hexadecimal 
+  - If the file type is not handled by any plugin it will display the file as hexadecimal 
 
 You can also select a specific type by clicking on the button corresponding to the type you want to force for that file.
 
-?> Don't forget to click the 'auto' button again if you force some visualization for you file, or the next file you click on any browser will use the same viewer. 
+?> Don't forget to click the 'auto' button again if you have forcde some visualization as the next file you click, on any browser, will use the same viewer. 
 
-This table show you the different implemented viewer for the corresponding datatype and extension :
+This table list the implemented viewer and the corresponding datatype and extension their are compatible with :
 
 |Viewer| Extension | Datatype|
 -------|-----------|---------|
@@ -881,7 +881,7 @@ This table show you the different implemented viewer for the corresponding datat
 
 ![tasks](tasks.jpg)
 
-The tasks window let you see each plugins that was launch on the **TAPIR** server, the argument provided to each of the plugin, and the status of the task associated to the plugin (waiting, running, finished).
+The tasks window let you see each plugins that was launch on the **TAPIR** server. The argument provided to each of the plugin and the status of the task associated to the plugin (waiting, running, finished).
 
 Like in the browser you can [sort](http://tap-ir.github.io/#/?id=sorting), [search](http://tap-ir.github.io/#/?id=searching) and [filter](http://tap-ir.github.io/#/?id=searching) the different columns.
 
@@ -889,7 +889,7 @@ Like in the browser you can [sort](http://tap-ir.github.io/#/?id=sorting), [sear
 
 ### Plugin results
 
-You can see the result or errors return by any plugin by double-clicking on the 'result' column of this plugin line. 
+You can see the results or errors returned by any plugins by double-clicking on the 'result' column of the corresponding plugin row. 
 
 ![task-result](task-result.jpg)
 
@@ -899,4 +899,3 @@ You can see the result or errors return by any plugin by double-clicking on the 
 ![plugins](plugins.jpg)
 
 This window simply show you all plugins supported by your **TAPIR** server instance, the category of each plugins and a description of the plugin.
-
