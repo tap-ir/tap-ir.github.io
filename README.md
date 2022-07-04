@@ -2,20 +2,20 @@
 
 **TAPIR** (Trustable Artifacts Parser for Incident Response) is a multi-user, client/server, incident response framework based on the [TAP](https://github.com/tap-ir/) project. 
 
-- It take as input  **file** (can be a disk dump or any kind of file), a **directory** containing different files (from a triage tool), a **disk dump**, or a disk **device**. Use different plugins to virtually extract data and metadata from those files, let you access them in an homogenous way via a REST API, and integrate a search engine [TAP-QUERY](https://github.com/tap-ir/tap-query) that let you create complex query to filter that data and metadata. 
+- It take as input  **files** (can be a **disk dump** or any kind of file), a **directory** containing different files (from a triage tool), or a disk **device**. It use different plugins to virtually extract data and metadata from those files, letting you access them in an homogenous way via a REST API, it also come with a search engine [TAP-QUERY](https://github.com/tap-ir/tap-query) that let you create complex query to filter data and metadata. 
 
 - Server can be accessed remotely or locally via it's REST API, or via :
 
-  - [TAPyR](https://github.com/tap-ir/tapyr) a python binding that can be used to create script to automate your investigation, 
+  - [TAPyR](https://github.com/tap-ir/tapyr) a python binding that can be used to create script to automate your investigation. 
   - [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd) unix like shell command.
   - [TAPIR-Frontend](https://github.com/tap-ir/tapir-frontend) a web UI.
 
 
 - It's multiplateform and run on Linux, Mac OS X, and Windows.
 
-This documentation is a user guide that will help you use and perform incident response with TAPIR. 
+This documentation is a user guide that will help you use and conduct incident response with TAPIR. 
 
-?> You might also be interested in [bin2json](https://github.com/tap-ir/bin2json) a simpler tool based also based on the [TAP](https://github.com/tap-ir/tap) library. **bin2json** can automatically and recursively extract metadata from files or devices to a JSON file that can be sent to a **siem** or analyzed with tool like [JQ](https://github.com/stedolan/jq).
+?> You might also be interested in [bin2json](https://github.com/tap-ir/bin2json) a simpler tool also based on the [TAP](https://github.com/tap-ir/tap) library. **bin2json** can automatically and recursively extract **metadata** from files or devices to a **JSON** file that can be sent to a **siem** or analyzed with tool like [JQ](https://github.com/stedolan/jq).
 
 ## Download
 
@@ -31,34 +31,34 @@ For instruction to launch the TAPIR server follow this [link](https://github.com
 
 # Concept
 
-To understand how **TAPIR** work it's good to understand some of the concept and terms related to this project.
+To understand how **TAPIR** work, it's good to understand some of the concept and terms related to this project.
 
 ## Tree and nodes
 
 **TAPIR** is used to ingest some data comming from a disk dump, triage files, device, ... and virtually extract data and metadata from those files. Those data are internally represented by a tree. Each node of the tree could represent either a file or a directory. Even if a node is a file it can have children that represent sub files contained in the parent file. This can be used to represent a file system (eg. after parsing an NTFS disk dump or an MFT), but also for exemple a registry hive, or any other kind of data. 
 
-The node can be accessed on the tree by using a path like in tradional file system. 
+The node can be accessed on the tree by using a path, like in tradional file system. 
 
 ## Attributes
 
-Each node of the tree have [Attributes](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html), those attributes can represent metadata, structure, or any kind of information related to a node.  
+Each node of the tree have [Attributes](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html). Those attributes can represent metadata, structure, or any kind of information related to a node.  
 
-[Attributes](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html) are a list of [attribute](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html) which are composed of a name and a [value](https://tap-ir.github.io/docs/dev/rustdoc/tap/value/enum.Value.html) of different type. 
+[Attributes](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html) is a container of [attribute](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html) which are themselve composed of a name and a [value](https://tap-ir.github.io/docs/dev/rustdoc/tap/value/enum.Value.html) of different type. 
 An [attribute](https://tap-ir.github.io/docs/dev/rustdoc/tap/attribute/struct.Attributes.html) can point to an other attribute as a pointer can point to an other structure in the "C" language.
 
-To represent an attributes path as a string the hierarchy of attribute is joined by '.'.  For exampe, an ntfs file,  will contain a standard\_information attribute that himself will contain an accessed_time attribute with value of type time. The path representing this attribute will be 'ntfs.standard_information.access_time' 
+To represent an attributes path as a string, the parent-children relation is marked with a  point ('.').  For exampe, an ntfs file,  will contain a standard\_information attribute that himself will contain an accessed_time attribute with value of type time. The path representing this attribute will be 'ntfs.standard_information.access_time' 
 
 ## Plugins
 
-Nodes and attributes are added in the tree by parser plugins. Some plugin like the **exif** plugin will only add information to existing node. For example the **exif** plugin will parse the content of an image containing exif information and will add some attribute to that file node like 'exif.primary.model'. In the same way the **plugin** will add the calculated hash of a file to it's attribute.
+Nodes and attributes are added in the tree by parser plugins. Some plugin like the **exif** plugin will only add information to existing node. For example the **exif** plugin will parse the content of an image containing exif information and will add some attributes to that node like 'exif.primary.model'. In the same way the **plugin** will add the calculated hash of a file to it's attribute.
 
-Other plugins like the NTFS plugins will create node with specific attribute. The **NTFS** plugin will read data coming from an other file and will create new node representing the content of that file system, each node will also have atrtibute corresponding to their ntfs metadata. 
+Other plugins like the NTFS plugins will create node with specific attribute. The **NTFS** plugin will read data coming from an other file and will create new node representing the content of that file system, each nodes will also have atrtibute corresponding to their ntfs metadata. 
 
-A last time of plugin exist, the "input" plugin those plugin, is used to access data that are external to the **TAPIR** tree and load them in the tree to be able to be parsed by other plugins. For example the **local** plugin let you access the file present in the **TAPIR** server filesystem, the **DEVICE** plugin can be used to read a raw device, or the **S3** plugin can be used to read file from an **S3** server.
+A last type of plugin exist, the "input" plugin, those pluginis are used to access data that are external to the **TAPIR** tree, and load them in that tree so they could be parsed by other plugins. For example the **local** plugin let you access the file present in the **TAPIR** server filesystem's, the **DEVICE** plugin can be used to read a raw device, or the **S3** plugin can be used to read file from an **S3** server.
 
-Each plugin take specific argument as input, but generally the plugin take a path to the node in the tree that it will parse and extract data from.
+Each plugins take specific argument as input, but generally a plugin take a path to the node that it will parse to extract some data and metadata.
  
-**TAPIR** is part of the [TAP](https://github.com/tap-ir/) project and the file type it support is the same as the tap project. (When new parser plugin is added to [TAP](https://github.com/tap-ir/) **TAPIR** is updated to include the new plugins).
+**TAPIR** is part of the [TAP](https://github.com/tap-ir/) project and the files types it support is the same as the one of [TAP](https://github.com/tap-ir/) project. (When new parser plugin is added to [TAP](https://github.com/tap-ir/), **TAPIR** is updated to include the new plugin).
 
 At time of writting this documentation this is the plugin included in **TAPIR** : 
 
@@ -85,11 +85,11 @@ At time of writting this documentation this is the plugin included in **TAPIR** 
 # Command line
 
 To use TAPIR via command line remotely or localy, you have to install [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd).
-TAPyR-cmd is a bunch of python script that are used like Unix commands. Some command output result are text or binary that can be piped to Unix command, and some other command output is in JSON format, so it can be piped to tool like [JQ](https://github.com/stedolan/jq) to filter data.
+TAPyR-cmd is a bunch of python script that are used like Unix commands. Some commands output result to text or binary that be piped to Unix command, and some other commands output JSON that can be piped to tool like [JQ](https://github.com/stedolan/jq).
 
 ## API key and remote access
 
-If you changed the default **API KEY** of your **TAPIR** server (that's recommend), you should set the key as an environment variable, so the command line tool can use it. 
+If you changed the default **API KEY** of your **TAPIR** server (that's recommended), you must set that key as an environment variable, so the command line tool can use it to authenticate to the server. 
 
 
 On Linux or MacOS X :
@@ -98,7 +98,7 @@ On Linux or MacOS X :
 export TAPIR_APIKEY=newkey
 ```
 
-If you're connecting to a remote **TAPIR** server or if you change the default port (3583) of the server you also need to set the address of the server as an environment variable. 
+If you're connecting to a remote **TAPIR** server, or if you changed the default port (3583) of the server, you also need to set the address of the server as an environment variable. 
 
 ```bash
 export TAPIR_ADDRESS=127.0.0.1:3583
@@ -111,18 +111,18 @@ When installing [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd) you can activat
  
 ## Loading data
 
-The first thing to do after the server is running is to load some data, that need to be analyzed, on the server.
+The first thing to do when the server is running is to load some data, that need to be analyzed, on the server.
 TAPIR come with differents plugins, some of those plugins of type **input** have for goal to load data on the server.
-At the moment three plugins exist : 
-  - Local who load files (can be a full disk dump, or any kind of files)  and directory recursively (can be a directory containing triage files)
-  - Device who let you read the content of a block device directly (a harddisk, or nvme disk)
-  - S3 that can be used to read a file from an S3 server
+At the moment three plugins of this kinds exist : 
+  - `Local` who load files (can be a full disk dump, or any kind of files)  and directory recursively (can be a directory containing triage files)
+  - `Device` who let you read the content of a block device directly (a harddisk, or nvme disk)
+  - `S3` that can be used to read a file from an S3 server
 
-A specific called `scan` can be used to load data via the `local` plugin and parse those data automatically.
+?> The [scan]((https://tap-ir.github.io/#/?id=scan) command can also be used to load data and parse those data automatically.
 
 ### Local
 
-To load a unique file via local just run : 
+To load a file wth `local` just run : 
 
 ```bash
 xlocal file_name
@@ -138,11 +138,12 @@ xlocal directory_name
 
 ### Scan
 
-**Scan** is a powerfull script, by using it you can avoid to manually launch any of the **TAPIR** plugins. **Scan** will load a dump, or a directory, and once the data are loaded it will automatically run other plugins to extract metadata from that files. To do that scan will run **TAPIR** **magic** plugin on each file, this plugin will detect the type of the file and add that information as an attribute inside **TAPIR** tree, then the scan script will check if any of the **TAPIR** plugins is compatible with that file type. If that's the case, it will then run that plugins. This will be done recursively, and can generate lot of data, that can take a huge amount of RAM, but you will ensure to have access as most as metadata and data that you can. 
+**Scan** is a powerfull script. By using it, you can avoid to manually launch any of the **TAPIR** plugins. **Scan** will load a dump, or a directory, and once those data are loaded it will automatically run other plugins to extract metadata from that files. 
+For that, scan will run **TAPIR** **magic** plugin on each file, this plugin detect the type of the file and add that information as an attribute of the node. Then the script check if any of the **TAPIR** plugins is compatible with that file type. If a compatible plugin is found, it will run that plugin on the this file. That is done recursively, and thus can generate lot of data and can take a huge amount of RAM, but it ensure that the all files are processed and that maximum of metadata and data have been extracted. 
 
-For example if you run scan on a disk dump, it will automatically load the file, run the partition plugins, to virtually extract partition from the disk, run the **ntfs** plugins if the disk is formated in **ntfs**, and run plugins for each other file compatible with **TAPIR** plugins, like **evtx** or **registry**, if the dump contain thousand of registry file in any directory for each of them a plugins will be launch. (See [listing tasks](https://tap-ir.github.io/#/?id=listing-tasks) to know how to see which plugins was launched).
+For example if you run scan on a disk dump, it will automatically load the file, run the partition plugin, to virtually extract partition from the disk, run the **ntfs** plugin if the disk is formated in **ntfs**, and run plugins for each other file compatible with **TAPIR** plugins, like **evtx** or **registry**. If the dump contain thousand of registry file, in any directory, for each of them a plugin will be launch. (See [listing tasks](https://tap-ir.github.io/#/?id=listing-tasks) to know how to list launched plugins).
 
-To run the scan just do :
+To run the scan on a file, on the **TAPIR** server filesystem's :
 
 ```bash
 xscan path_to_file_or_directory
@@ -156,9 +157,9 @@ xscan
 
 ### Running plugin manually 
 
-To run a plugin just execute the script corresponding to the name of the plugin, parser plugin generally take as first argument the path to the file you want extract. 
+To run a plugin just execute the script corresponding to the name of the plugin, parser plugin generally take as first argument the path to the file you want to extract. 
 
-Example to extract the content of an **MFT** file loaded into **TAPIR**
+Example to extract the content of an **MFT** file loaded into **TAPIR** :
 
 ```bash
 xmft /root/MFT
@@ -166,15 +167,24 @@ xmft /root/MFT
 
 ## Tasks
 
-When a plugin is executed it's added to **TAPIR** scheduler that will execute it as soon as it can. By running a script like **scan** for example many tasks can added to the queue at the same time. A task is composed of a plugin name and some arguments passed to this plugins. Each task can have 3 states :  **waiting**, **running** or **finished**, depending if they are waiting to be executed, they are currently being executed and if execution is finished. When a task is in the finished state, the result of the execution of the task is associated to it. The result of the task can be an error (could came from wrong argument provided to the plugin, parsing errors, ...) or some result specific to the plugin. 
+When a plugin is executed it's added to **TAPIR** scheduler that will execute it as soon as it can. 
+By running a script like **scan** many tasks can added to the queue at the same time. A task is composed of a plugin name and some arguments passed to this plugin. 
+Each task can have 3 states :  
+  - waiting
+  - running
+  - finished
+
+This state describe if they are waiting to be executed, they are currently being executed or if execution is finished. 
+When a task is in the finished state, the result of the execution of the task is associated to it. 
+The result of the task can be an error (could came from wrong argument provided to the plugin, parsing errors, ...) or some result specific to the plugin. 
 
 ### Listing tasks
 
-To list all task with their argument just run the `ps` command
+To list all tasks with their argument just run the `ps` command
 
 ### Tasks summary
 
-To display a summary of the number of task executed by plugin type use the `psstat` command : 
+To display a summary of the number of tasks executed by each plugin use the `psstat` command : 
 
 ## Browsing 
 
@@ -183,32 +193,32 @@ you will want to browse the **TAPIR** tree made of nodes (files and directories)
 
 ### Listing files
 
-To list file you can use the `ls`, always prepend **/root/** before the name of the loaded files. 
+To list file you can use `xls` (always prepend **/root/** before the name of the loaded files).
 
 ```bash
 xls /root/cfreds_2015.dd/partition_2/ntfs/root/Windows/System32
 ```
 
-?> The `ls` command and some other can use [bash completion](https://tap-ir.github.io/#/?id=bash-completion) (either localily or remotely) that make it a lot more convenient to use.
+?> The `ls` command, and others one, can use [bash completion](https://tap-ir.github.io/#/?id=bash-completion) (either localily or remotely,) that make them lot more convenient to use.
 
 ### Listing attributes
 
-To list file attribute you can use `attr` command like the `ls` command by providing the path of any nodes in the tree.
-It will output attributes information on the JSON format. To parse that information we recommand to use tool like [JQ](https://github.com/stedolan/jq)
+To list a file attribute you can use the`attr` command, like the `ls` command, by providing the path of any nodes in the tree.
+It will output attributes information in the JSON format. To parse that information we recommend to use tool like [JQ](https://github.com/stedolan/jq)
 
-To display the [attributes](https://tap-ir.github.io/#/?id=attributes) of the $MFT in raw JSON format
+To display the [attributes](https://tap-ir.github.io/#/?id=attributes) of the $MFT in raw JSON format :
 
 ```bash
 xattr "/root/mydump.dd/partition_2/ntfs/root/\$MFT"
 ``` 
 
-To display all [attributes](https://tap-ir.github.io/#/?id=attributes) of the $MFT via `JQ` 
+To display all [attributes](https://tap-ir.github.io/#/?id=attributes) of the $MFT via `JQ` :
 
 ```bash
 xattr "/root/mydump.dd/partition_2/ntfs/root/\$MFT" | jq
 ```
 
-To display the size of the $MFT 
+To display the size of the $MFT :
 
 ```bash
 ./xattr "/root/cfreds_2015.dd/partition_2/ntfs/root/\$MFT" | jq .attributes.data.size
@@ -220,12 +230,12 @@ To display the access time contained in the standard information structure extra
 ./xattr "/root/cfreds_2015.dd/partition_2/ntfs/root/\$MFT" | jq .attributes.ntfs.standard_information.accessed_time
 ````
 
-!> We need to add **quote**  when there is space in the path of the file and **backslash** for special character like **$** to avoid them being interpreted by the shell
+!> We need to add **quote**  when there is space in the path of the file and **backslash** for special character like **$** to avoid them being interpreted by the shell.
 
 ### Adding attribute
 
-You can also add attributes to notes it can be used to share something you observed with other analysts. 
-To do that use the `xattr` command followed by the attribute name, the attribute value, and the pass of the node 
+You can also add your own attributes to a node. This can be used to share something you observed with other analyst. 
+To do that use the `xattr` command followed by the attribute name, the attribute value, and the pass of the node : 
 
 ```bash
 xattr tag malware /root/dump.dd/partition_2/ntfs/root/12345.exe
@@ -233,13 +243,14 @@ xattr tag malware /root/dump.dd/partition_2/ntfs/root/12345.exe
 
 ### Displaying file content
 
-To display the content of a file on the console you can use the command `xcat`.
+To display the content of a file on the console you can use the command `xcat` :
 
 ```bash
 xcat /root/dump.dd/partition_2/ntfs/root/Users/desktop.ini
 ````
 
-You can also pipe the content of file to an other command for example to display the content of the file as hexadecimal.
+You can also pipe the content of a file to an other command. 
+For example to display the content of the file as hexadecimal :
 
 ```bash
 xcat /root/cfreds_2015.dd/partition_2/ntfs/root/pagefile.sys | xxd | less
@@ -247,7 +258,7 @@ xcat /root/cfreds_2015.dd/partition_2/ntfs/root/pagefile.sys | xxd | less
 
 ### Downloading files
 
-To download the content of the file you can simply use the download command 
+To download the content of a file you can simply use the download command : 
 
 ```bash
 xdownload /root/cfreds_2015.dd/partition_2/ntfs/root/Windows/System32/config/SYSTEM
@@ -260,13 +271,13 @@ xdownload /root/cfreds_2015.dd/partition_2/ntfs/root/Windows/System32/config/SYS
 
 ## Query & timeline
 
-**TAPIR** integrate the [tap-query](https://github.com/tap-ir/tap-query) library to let create powerfull query to search precise stuff in all the data and metadata extracted by the plugins.You can search for some attribute name, value or search inside data (content of file). **TAPIR** also let you create timeline that integrate timestamp generated by the different parser plugins (ntfs, registry, event logs, exif, ...), each new plugin integrated into **TAPIR** will automatically have it's timestamp attribute integrated into the timeline. 
+**TAPIR** integrate the [tap-query](https://github.com/tap-ir/tap-query) library to let create powerful query, that let you search precise stuff in all the data and metadata extracted by the plugins. You can search for some attribute name, value or search inside data (content of file). **TAPIR** also let you create timeline that integrate timestamp generated by the different parser plugins (ntfs, registry, event logs, exif, ...) . Each plugin newly integrated into **TAPIR** will automatically have it's timestamp attribute integrated into the timeline. 
 
-Search and timeline are multithreaded and generally very fast to generate (few seconds) even if millions of attributes is present in the **TAPIR** tree. Searching is generally IO bound and will depend of the speed of your disk, however we stronly recommend to use **TAPIR** with data stored on NVME disk. 
+Search and timeline are multithreaded and generally very fast to generate (few seconds) even if millions of attributes is present in the **TAPIR** tree. Searching for data, is generally IO bound and will depend of the speed of your disk, however we stronly recommend to use **TAPIR** with data stored on NVME disk. 
 
 ### Query syntax 
 
-Each query is made of one expression (of a specified type) or multiple expression separated by an operator. The constructed query can be passed to the `find` command that will return 
+Each query is made of one expression (of a specified type) or multiple expressions separated by an operator. The constructed query can be passed to the `find` command that will return all nodes that match the query. 
 
 |Expression     | value matched |
 |---------------|---------------|
@@ -285,7 +296,7 @@ Type to specify for name and attribute :
 |w     | wildcard (use ? and * to replace character) |
 |f     | fuzzy matching                              |
 
-Type to specify for 'data' :
+Type to specify for data :
 
 | Data type | value matched                                                   |
 |-----------|-----------------------------------------------------------------|
@@ -304,31 +315,31 @@ Operator that can be used between expression :
 
 Using the **name** expression, you can match on file name.
 
-* Seach all file named **image1.jpg**
+* Seach all files named **image1.jpg** :
 
 ```bash
 xfind  "name == 'image1.jpg'"
 ```
 
-* Search all file with an extension of type .jpg (lower case) using wildcard : 
+* Search all files with an extension of type .jpg (lower case) using wildcard : 
 
 ```bash
 xfind "name == w'*.jpg'"
 ````
 
-* Search for file with a bame starting by image and with an underscore using wildcard : 
+* Search for files with a bame starting by image and with an underscore using wildcard : 
 
 ```bash
 xfind "w'image?_*.jpg'
 ```
 
-* Search file name containing an extension .jpg or .tiff using regexp : 
+* Search file names containing an extension .jpg or .tiff using regexp : 
 
 ```bash
 xfind "name == r'([^\s]+(\.(?i)(jpg|tiff))$)'"
 ```
 
-* Search for a file named image1.jpg or starting by image 2 : 
+* Search for files named image1.jpg or starting by image 2 : 
 
 ```bash
 xfind "name == 'image1.jpg' or name == w'image2*'"
@@ -338,19 +349,19 @@ xfind "name == 'image1.jpg' or name == w'image2*'"
 
 Using the **data** expression, you can match content of files.
 
-* Search binary or text file containing ascii character 'hello' :
+* Search binary or text filex containing ascii character 'hello' :
 
 ```bash
 xfind "data == 'hello'"
 ```
 
-* Search file having ELF signature 
+* Search files having ELF signature : 
 
 ```bash
 xfind  "data == '\x7F\x45\x4C\x46'"
 ```
 
-* Search UTF-8 or UTF-16 file containing 'икра'  
+* Search UTF-8 or UTF-16 files containing 'икра' :  
 
 ```bash
 xfind  "data == t'икра'"
@@ -358,21 +369,21 @@ xfind  "data == t'икра'"
 
 #### Matching attributes
 
-Using the **attribute.name** expression you can search for file having an [attributes](https://tap-ir.github.io/#/?id=attributes) matching a specific name. 
+Using the **attribute.name** expression you can search for files having an [attribute](https://tap-ir.github.io/#/?id=attribute) matching a specific name. 
 
-* Search for files with an 'exif' attribute (meaning file was parsed with the **exif** plugin)
+* Search for files with an 'exif' attribute (files parsed by the **exif** plugin) :
 
 ```bash
 xfind "attribute.name == 'exif'"
 ```
 
-* Search for files with an 'exif.primary.model'  
+* Search for files with an 'exif.primary.model' : 
 
 ```bash
 xfind "attribute.name == 'exif.primary.model'"
 ```
 
-* Search for a files with an attribute named "exif" something then "model", with wildcard 
+* Search for a files with an attribute named "exif" something then "model", with wildcard :
 
 ```bash
 xfind "attribute.name == w'exif.*.model'"
@@ -380,7 +391,7 @@ xfind "attribute.name == w'exif.*.model'"
 
 Using the **attribute:'attribute_name'** expression you can match for a value of a specific attribute.
 
-* Search for files with an attribute named 'evtx.event.eventdata.imagepath' with a value containing the string 'powershell' 
+* Search for files with an attribute named 'evtx.event.eventdata.imagepath' with a value containing the string 'powershell' :
 
 ```bash
 xfind "attribute:'evtx.event.eventdata.imagepath' == w'*powershell*'"
@@ -393,7 +404,7 @@ xfind "attribute:w'evtx.event*' == w'*powershell*'"
 ```
 
 
-* Search for files for which any of the attributes have a value containing the string 'powershell'
+* Search for files for which any of the attributes have a value containing the string 'powershell' :
 
 ```bash
 xfind "attribute:w'*' == w'*powershell*'"
@@ -402,7 +413,7 @@ xfind "attribute:w'*' == w'*powershell*'"
 
 #### Creating timeline
 
-To create a timeline you can use the `xtimeline` command just provide the starting date, the end date and the name of file where to output the timeline.
+To create a timeline you can use the `xtimeline` command. Just provide the starting date, the end date and the name of file where to output the timeline :
 
 
 ```bash
@@ -411,12 +422,12 @@ To create a timeline you can use the `xtimeline` command just provide the starti
 
 ## Python scripting
 
-For scripting in python you can launch the `xshell` command it will create a **TAPIR** session using the [TAPyR](https://github.com/tap-ir/tapyr) library. Or you can create this session manually, then by you can start scripting by using the different function provide by the API.
+For scripting in python, you can launch the `xshell` command. It will create a **TAPIR** session using the [TAPyR](https://github.com/tap-ir/tapyr) library. Or you can create this session manually, then you can start scripting by using the different function provide by the API.
 
 ### Connecting to the server
 
-To connect manually just launch a python3 shell, import the right library and create a session.
-By default it will connect on localhost (127.0.0.1) on port 3583 with the default API key,  you can connect to an other host with specific key by settings the environment [variable](https://tap-ir.github.io/#/?id=api-key-and-remote-access) as we did for the command or by passing the right argument when initializing the Tapirobject.
+To connect manually just launch a python3 shell, import the [TAPyR](https://github.com/tap-ir/tapyr) library and create a session.
+By default it will connect to localhost (127.0.0.1) on port 3583 using the default API key. You can connect to an other host and specify an api key by settings environment [variable](https://tap-ir.github.io/#/?id=api-key-and-remote-access) as we did to use the command line tool, or by passing the some arguments at the initialization of the Tapir object.
 
 ```python
 from tapyr import Tapir
@@ -424,7 +435,7 @@ from tapyr import Tapir
 session = Tapir()
 ```
 
-To connect to the IP 1.2.3.4 on port 1234 with key 'mykey' 
+To connect to the IP "1.2.3.4" on port "1234" with key "mykey" : 
 
 ```python
 from tapyr import Tapir
@@ -434,7 +445,7 @@ session = Tapir(address="1.2.3.4:1234", api_key="mykey")
 
 ### Using the API 
 
-You can use the the node function to get a node of the tree. 
+You can use the the node function to get a node of the tree : 
 
 ```python
 from tapyr import Tapir
@@ -443,9 +454,9 @@ session = Tapir()
 windows = session.node("/root/my_dump.dd/partition_2/ntfs/root/Windows")
 ```
 
-This will return a python object from which you can directly access the node attributes as python instance variable.
+This will return a python object from which you can directly access the node attributes, as python instance variable.
 
-!> You can use python3 shell compection to access the attribute by using `tab` 
+?> You can use python3 shell compection to access the attribute by using `tab` 
 
 ```python
 >>> print(windows.ntfs.is_deleted)
@@ -456,15 +467,15 @@ False
 2015-03-25T14:50:50Z
 ```
 
-For more other API function look at the [TAPyR](https://github.com/tap-ir/tapyr) project.
+For other API functions description look at the [TAPyR](https://github.com/tap-ir/tapyr) project.
 
 ### Using query 
 
 You can use [query](https://tap-ir.github.io/#/?id=query-syntax) directly from the API to search for specific files.
-The query API function take a string with query as first parameter and a second a parameter a string with the path from which the query will be applyied. (By default it will search from the root of the tree).
-The query function will not return a list of nodes but a list of node\_id. To get a node from an id you can use the node\_id API function.
+The query API function take the query as first parameter and as second optional parameter the path from which the query will be applyied. (If the second parameter is not provided, it will search from the root of the tree).
+The query function will not return a list of nodes but a list of "node\_id". To get a node from an id you can use the `node\_id` API function.
 
-* To search for all file with a .exe suffix from the root of the tree and display file name
+* To search for all files with a .exe suffix from the root of the tree and display the files name :
 
 ```python
 >>> for node_id in session.query("name == w'*.exe'"):
@@ -472,7 +483,7 @@ The query function will not return a list of nodes but a list of node\_id. To ge
 ...
 ```
 
-* Each function called from the session object will create a request to the server, to avoid make a request for each in the loop you can use the 'nodes\_by\_id' function that take a list of nodes\_id and return a list of nodes. 
+* Each function called from the session object will create a request to the server, to avoid to make too much request, you can use the 'nodes\_by\_id' function that take a list of nodes\_id and return a list of nodes. 
 
 ```python
 >>> for node in session.nodes_by_id(session.query("name == w'*.exe'"), name=True):
@@ -482,7 +493,7 @@ The query function will not return a list of nodes but a list of node\_id. To ge
 
 ### Example : Downloading all files that match a query
 
-This python script take a [query](https://tap-ir.github.io/#/?id=query-syntax) as first argument and download file that match a query to the directory specified as second argument.
+This python script take a [query](https://tap-ir.github.io/#/?id=query-syntax) as first argument and download files that match a query to the directory specified as second argument.
 
 ```python
 #!/usr/bin/python3 
@@ -499,13 +510,13 @@ if len(sys.argv) == 3:
       print("Can't download file : " + node.path)
 ```
 
-You can save this script in a file name 'extract.py' and for example use it like that download all file with suffix .exe in a directory 'excutable' that you will have created in the same directory than the script.
+You can save this script in a file name 'extract.py' and use it to download all file with '.exe' suffix, in the 'executable' directory (you must create the 'executable' directory in the same directory than the script before launching it) :
 
 ```bash
 ./extract.py "name == w'*.exe'" executable/
 ```
 
-If you previously runned the magic plugin or the scan command on the server, that detect file type. You can use the script to extract all files detected has executable even if the extension is not '.exe' like that : 
+If you previously runned the magic plugin or the scan command on the server, to detect file type, you can use the script we just write, to extract all files detected has executable even if the extension is not '.exe' by using the 'datatype' attribute : 
 
 ```bash
 ./extract.py "attribute:'datatype' == 'application/x-executable'" executable/
@@ -513,7 +524,7 @@ If you previously runned the magic plugin or the scan command on the server, tha
  
 ### Example : Searching powershell script in windows event log
 
-This script use [query](https://tap-ir.github.io/#/?id=query-syntax) to search for powershell script in windows events log and display information about the event and the script itself
+This script use [query](https://tap-ir.github.io/#/?id=query-syntax) to search for powershell scripts in windows events logs and display information about the event and the powershell script :  
 
 ```python
 session = Tapir()
