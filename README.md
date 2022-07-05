@@ -87,6 +87,23 @@ At time of writting this documentation this is the plugin included in **TAPIR** 
 To use TAPIR via command line remotely or localy, you have to install [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd).
 TAPyR-cmd is a bunch of python script that are used like Unix commands. Some commands output result to text or binary that be piped to Unix command, and some other commands output JSON that can be piped to tool like [JQ](https://github.com/stedolan/jq).
 
+## Installation
+
+To install TAPyR-cmd run :
+
+```bash 
+pip install tapyr-cmd
+```
+
+## Bash completion
+
+After installing [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd) you can activate bash completion by issung this command :
+
+```bash
+wget https://raw.githubusercontent.com/tap-ir/tapyr-cmd/main/tapyr-cmd-completion.bash
+sudo mv tapyr-cmd-completion.bash /etc/bash_completion.d/ && sudo chmod 444 /etc/bash_completion.d/tapyr-cmd-completion.bash
+```
+
 ## API key and remote access
 
 If you changed the default **API KEY** of your **TAPIR** server (that's recommended), you must set that key as an environment variable, so the command line tool can use it to authenticate to the server. 
@@ -104,11 +121,6 @@ If you're connecting to a remote **TAPIR** server, or if you changed the default
 export TAPIR_ADDRESS=127.0.0.1:3583
 ```
 
-
-## Bash completion
-
-When installing [TAPyR-cmd](https://github.com/tap-ir/tapyr-cmd) you can activate bash completion by copying the file `tapyr-cmd-completion.bash` to your `/etc/bash_completion.d/` directory or by executing the command  `source tapyr_completion.bash`
- 
 ## Loading data
 
 The first thing to do when the server is running is to load some data, that need to be analyzed, on the server.
