@@ -17,9 +17,18 @@ This documentation is a user guide that will help you use and conduct incident r
 
 ?> You might also be interested in [bin2json](https://github.com/tap-ir/bin2json) a simpler tool also based on the [TAP](https://github.com/tap-ir/tap) library. **bin2json** can automatically and recursively extract **metadata** from files or devices to a **JSON** file that can be sent to a **siem** or analyzed with tool like [JQ](https://github.com/stedolan/jq).
 
-## Download
+## Download & installation 
 
-Release binary are available [here](https://github.com/tap-ir/tapir/releases)
+Debian/Ubuntu package & Windows binary are available [here](https://github.com/tap-ir/tapir/releases)
+
+To install the package in Debian or Ubuntu :
+
+```bash
+sudo dpkg -i tapir_0.1.0_amd64.deb 
+```
+
+!> You will certainly need to [install **TAPyR-cmd**](https://tap-ir.github.io/#/?id=installation) too.
+
 
 ## Building
 
