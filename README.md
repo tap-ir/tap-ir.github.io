@@ -430,7 +430,7 @@ To connect manually just launch a python3 shell, import the [TAPyR](https://gith
 By default it will connect to localhost (127.0.0.1) on port 3583 using the default API key. You can connect to an other host and specify an api key by settings environment [variable](https://tap-ir.github.io/#/?id=api-key-and-remote-access) as we did to use the command line tool, or by passing the some arguments at the initialization of the Tapir object.
 
 ```python
-from tapyr import Tapir
+from tapyr.api import Tapir
 
 session = Tapir()
 ```
@@ -438,7 +438,7 @@ session = Tapir()
 To connect to the IP "1.2.3.4" on port "1234" with key "mykey" : 
 
 ```python
-from tapyr import Tapir
+from tapyr.api import Tapir
 
 session = Tapir(address="1.2.3.4:1234", api_key="mykey")
 ```
@@ -448,7 +448,7 @@ session = Tapir(address="1.2.3.4:1234", api_key="mykey")
 You can use the the node function to get a node of the tree : 
 
 ```python
-from tapyr import Tapir
+from tapyr.api import Tapir
 
 session = Tapir()
 windows = session.node("/root/my_dump.dd/partition_2/ntfs/root/Windows")
@@ -497,7 +497,7 @@ This python script take a [query](https://tap-ir.github.io/#/?id=query-syntax) a
 
 ```python
 #!/usr/bin/python3 
-from tapyr import Tapir
+from tapyr.api import Tapir
 
 session = Tapir()
 
