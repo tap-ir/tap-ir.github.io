@@ -920,3 +920,9 @@ You can see the results or errors returned by any plugins by double-clicking on 
 ![plugins](plugins.jpg)
 
 This window simply show you all plugins supported by your **TAPIR** server instance, the category of each plugins and a description of the plugin.
+
+# Video 
+
+Here is a talk about TAPIR presentend at [pass-the-salt 2022](https://2022.pass-the-salt.org/)
+
+<iframe width="720" height="530" src="https://passthesalt.ubicast.tv/permalink/v126400010276dios5ji/iframe/" allowfullscreen="allowfullscreen" allow="autoplay"></iframe>
